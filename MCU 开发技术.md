@@ -623,3 +623,62 @@ volatile 关键字：取消编译器优化，即告诉编译器不要优化对�
 
 
 上电复位和手动复位。
+
+
+
+
+
+
+
+### STM32 时钟树
+
+STM32 有 5 个时钟源：
+
+- HSE：High Speed External，高速外部时钟
+- LSE：Low Speed External，低速外部时钟
+- HSI：High Speed Internal，高速内部时钟
+- LSI：Low Speed Internal，低速内部时钟
+- PLL：锁相环（将输入时钟信号进行倍频处理后输出）
+
+预分频(Prescaler)和倍频
+
+AHB 总线：高级主机总线，连接 CPU、RAM、Flash 等高速设备
+APB 总线：高级外设总线，用于连接各种外设，分为 APB1 和 APB2，它们都桥接到 AHB 总线上，APB2 > APB1，APB2 总线用于连接高速外设，APB1 用于连接低速外设
+
+> Peripheral：外设
+> Bus：总线
+
+SYSCLK 的三个来源：
+
+- HSE
+- HSI
+- PLL
+
+LSE：可以作为 RTC 外设的时钟源
+LSI：可以作为 RTC 和 IWDG 外设的时钟源
+
+> RTC：Real Time Clock，实时时钟
+> IWDG：Independent Watch Dog，独立看门狗
+
+### 4定时器(Timer)
+
+用于对输入时钟脉冲信号进行计数/计时的外设。
+
+> 定时器其实就是一个计数器，每当有一个时钟脉冲到来，它的计数值就会加一个。
+
+STM32F103RBT6 有四个 16 位定时器，TIM1 - TIM4，TIM1 是高级定时器，TIM2 - TIM4 是通用定时器。
+
+如果定时器的输入时钟频率为 F，那么它的计数频率为：F / (PSC + 1)，计数周期为：(ARR + 1) * (PSC + 1) / F
+
+Handle：句柄，指向目标对象的指针
+
+
+
+
+
+重要参数：
+
+- PSC：预分频系数
+- ARR：自动重装载值
+
+案例：使用定时器实现高精度微秒级延时（使用查询方式）
