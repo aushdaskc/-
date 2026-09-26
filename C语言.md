@@ -1885,6 +1885,43 @@ for(int i = 0; i < sizeof(stus) / sizeof(stus[0]); i++)
 
 
 
+
+
+#### 柔性数组
+
+
+
+结构体的最后一个数据成员可以是一个没有指定长度的数组(柔性数组)，C99 开始支持。
+
+
+
+```C
+struct packet
+{
+  int num;
+  int len;
+  char data[]; // 柔性数组
+};
+
+sizeof(struct packet);  // 8
+
+// 柔性数组只能在堆区中使用
+struct packet* p1 = malloc(sizeof(struct packet) * 100);
+p1->len = 100;   // 柔性数组的实际长度存放在数据成员 len 上
+
+strcpy(p1->data, "junge");
+
+free(p1);
+```
+
+
+
+
+
+
+
+
+
 ### 结构体与指针
 
 结构体指针
