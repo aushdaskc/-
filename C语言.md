@@ -2430,3 +2430,41 @@ fread(&c, 1, stdin)
 fprintf(stderr, "error?");
 fclose(stdin);  // 关闭标准输入
 ```
+
+
+
+
+
+
+
+
+
+## 命令行参数
+
+
+
+通过 main 函数参数可以接收命令行参数进行处理。
+
+
+
+```C
+//int main(int argc, char* argv[])
+int main(int argc, char** argv)
+{
+    // argc：argument count,命令行参数的个数
+    // argv：argument vector,命令行参数构成的数组(字符串数组，每个参数就是一个字符串，该数组的长度就是 argc)
+    
+    printf("命令行参数个数：%d\n", argc);
+    
+    for(int i = 0; i < argc; i++)
+    {
+        printf("%s\n", argv[i]);
+    }
+    
+    return 0;
+}
+```
+
+
+
+通过命令行参数也可以将外部数据传入程序内部进行处理。
