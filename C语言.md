@@ -756,6 +756,62 @@ C 语言程序启动后，系统会自动调用主函数(main 函数)， 主函�
 
 
 
+
+
+
+
+###  可变参数
+
+
+
+可变参数只能出现在最右边，前面必须至少有一个固定参数，原理就是通过前面的固定参数的地址推算出后面可变参数的地址从而访问它们。
+
+
+
+通过 va_start、va_arg、va_end 
+
+```C
+#include <stdio.h>
+#include <stdarg.h>
+
+
+double sum(int n, ...)
+{
+    double s = 0;
+    va_list ap;
+
+    va_start(ap, n);
+    while(n--)
+    {
+        s += va_arg(ap, double);
+    }
+    va_end(ap);
+
+    return s;
+}
+
+
+int main()
+{
+    printf("%g\n", sum(2, 2.1, 3.3));
+
+    return 0;
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 递归函数(Recursive Function)
 
 自己调自己的函数。
