@@ -41,7 +41,7 @@ Linux 系统调用(System Call)：Linux 系统提供的各种 API 函数。
 普通文件操作常用系统调用：
 
 - open：打开文件
-- create：打开文件(如果文件不存在就创建，存在清空，等效于 open 函数带上 O_WRONLY | O_CREAT | O_TRUNC 参数)
+- creat：打开文件(如果文件不存在就创建，存在清空，等效于 open 函数带上 O_WRONLY | O_CREAT | O_TRUNC 参数)
 - read：读文件
 - write：写文件
 - close：关闭文件
