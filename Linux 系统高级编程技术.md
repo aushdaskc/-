@@ -665,3 +665,137 @@ pthread_create 函数参数意义：
 - 调用 pthread_detach 将线程设置为分离状态(Detach State)，线程默认状态为 Joinable 状态，当将线程设置为分离状态后，一旦它结束，系统会自动彻底释放其资源
 
 如何优雅安全的结束其他线程？设置一个退出标志，线程在工作时周期性轮询该退出标志，如果退出标志为 1，就停止工作，清理自身资源后退出。
+
+
+
+
+
+
+
+并发执行：宏观上(在人看来)同时执行，在微观某一时刻多线程其实并不是同时执行。
+
+并行执行：真正意义上的同时执行，在微观某一时刻有多个线程在同时执行。
+
+
+
+
+
+
+
+### 多线程同步控制
+
+
+
+
+
+当多个线程同时访问同一个资源或有限资源时(如多线程读写同一个文件、访问同一个全局变量等)，如果任由它们同时进行访问，可能会带来问题，即竞态问题，此时必须进行同步控制。
+
+
+
+
+
+> 同步：Sync
+
+
+
+WSL：windows Sub-System for Linux，windows 上的 Linux 子系统。
+
+
+
+
+
+原子性操作：多个操作要么都执行，要么没有执行，中间不能被打断。
+
+
+
+
+
+常用多线程同步控制方式：
+
+- 互斥锁(Mutex)
+- 自旋锁(Spin Lock)
+- 读写锁(Read-Write Lock)
+- 信号量(Semaphore)
+- 条件变量(Condition Variable)
+
+
+
+
+
+#### 互斥锁(Mutex)
+
+
+
+互斥锁用于控制多个线程轮流访问通用资源，它是同步控制的一种情况。
+
+
+
+
+
+互斥锁操作函数：
+
+- pthread_mutex_init：初始化互斥锁
+- pthread_mutec_destroy：销毁互斥锁
+- pthread_mutex_lock：加锁，阻塞
+- pthread_mutex_trylock：加锁，非阻塞
+- pthread_mutex_unlock：解锁
+
+
+
+加锁粒度最小化原则。
+
+
+
+
+
+#### 自旋锁(Spin Lock)
+
+
+
+功能和互斥锁一样，都是用于控制多线程互斥访问某一个资源。
+
+
+
+自旋锁操作函数：
+
+- pthread_spin_init：初始化互斥锁
+- pthread_spin_destroy：销毁互斥锁
+- pthread_spin_lock：阻塞方式加锁，如果互斥锁已被加锁，该函数会阻塞调用线程
+- pthread_spin_trylock：非阻塞方式加锁，如果互斥锁已被加锁，该函数会失败返回
+- pthread_spin_unlock：解锁
+
+
+
+
+
+自旋锁和互斥锁的功能一样，都是用于控制多线程互斥运行，主要区别如下：
+
+- 等待锁期间的行为不一样，互斥锁是休眠等待(Sleep Wait)，自旋锁是忙等待(Busy Wait)
+- 在等待互斥锁期间线程处于挂起状态，不需要占用 CPU 资源，但效率较低，适合等待时间较长的应用场景
+- 在等待自旋锁期间线程处于忙碌状态，高速轮询锁的状态，需要 CPU 执行代码，效率很高，适合等待时间极短的应用场景
+
+
+
+
+
+#### 读写锁(Read-Write Lock)
+
+
+
+
+
+主要用于控制多个线程同时对一个文件进行读写的应用场景，它的特点是：读操作可以同时进行，但写操作和写操作、写操作和读操作必须互斥进行。
+
+
+
+读写锁操作函数：
+
+- pthread_rwlock_init：初始化读写锁
+- pthread_rwlock_destroy：销毁读写锁
+- pthread_rwlock_rdlock：阻塞方式加读锁，多个线程可以同时获得读锁
+- pthread_rwlock_tryrdlock：非阻塞方式加读锁
+- pthread_rwlock_timedrdlock：阻塞方式加读锁，超时会失败返回
+- pthread_rwlock_wrlock：阻塞方式加写锁，写锁是互斥的
+- pthread_rwlock_trywrlock：非阻塞方式加写锁
+- pthread_rwlock_timedwrlock：阻塞方式加写锁，超时会失败返回
+- pthread_rwlock_unlock：解锁
