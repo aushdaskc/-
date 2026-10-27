@@ -1390,3 +1390,56 @@ typedef struct
 #pragma pack(pop)
 ```
 
+
+
+
+
+1024 以下端口号为树枝端口号，它们很多都被世界知名服务器或系统应用专用，我们的程序应该尽量使用更大的端口号。
+
+
+
+HTTP：Hyper Text Transmit Protocol，超文本传输协议，基于 TCP 协议的应用层协议。它是 Web 世界的通信语言，Web 服务器和浏览器(Browser)之间的通信就是采用 HTTP 协议。
+
+
+
+B/S 模式：Browser/Server Mode，浏览器/Web 服务器模式，它是 C/S 模式的一种情况，浏览器就是客户端程序。
+
+
+
+实战：手搓 Web 服务器
+
+
+
+
+
+
+
+MQTT：Message Queue Telemetry Transport，消息队列遥测传输协议，基于 TCP 协议的应用层协议，在物联网项目中应用广泛。采用发布和订阅的通信方式，MQTT Broker 就是 TCP 服务器，MQTT Client 就是 TCP 客户端。
+
+
+
+MQTT Broker 推荐：EMQX、Mosquitto等。
+
+
+
+
+
+
+
+## I/O 多路复用
+
+
+
+Select/Poll 编程模型
+
+epoll 编程模型(事件驱动)
+
+
+
+> 新项目强烈建议采用 epoll 编程模型
+
+
+
+用户态
+
+内核态
