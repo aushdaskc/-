@@ -272,3 +272,152 @@ int main()
 }
 ```
 
+
+
+
+
+
+
+## OOP
+
+
+
+对象(Object)：任何应该实际存在的事物
+
+类(Class)：具有相同特征的所有对象的集合。
+
+
+
+类是对象的抽象，对象是类的实例(Instance)。
+
+每个对象都有自己的属性(Attribute)和方法(Method)，属性表示对象的静态数据特征，方法表示对象的动态行为。属性也称为成员变量(Member Variables)或数据成员，方法也称为成员函数(Member Function)或函数成员。
+
+
+
+OOP 三大特性：封装、继承、多态。
+
+
+
+实例化：就是通过类定义对象
+
+
+
+> 类其实就是一种数据类型,和结构体几乎相同,对象就是类类型的变量或常量
+
+
+
+类必须先声明(定义)在使用,使用 class 关键字声明。
+
+
+
+声明类，然后使用类定义对象(实例化)，访问对象的属性和方法：
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class person
+{
+    // 定义属性(成员变量)
+    int id;
+    string name;
+    float height;
+    
+    // 定义方法(成员函数)
+    void speak();
+    {
+        cout << "I can speak!" << endl;
+    }
+    int sum(int a, int b)
+    {
+        return a + b;
+    }
+};
+
+// 全局对象
+person p4;
+static person p5;
+
+int main()
+{
+    // 栈区对象
+    person p1;
+    static person p2;
+    
+    // 访问对象属性
+    p1.id = 1000;
+    
+    // 调用对象的方法
+    p1.speak();
+    
+    // 堆区对象
+    person* p3 = new person;
+    p3->id = 1003;
+    
+    delete p3;
+    
+    return 0;
+}
+```
+
+
+
+类就是将数据(即属性)和数据的操作(即方法)封装在一起构成一个整体。封装级别比函数更高。
+
+
+
+new 和 delete 是 C++ 新增运算符，用于在堆区申请和释放内存空间。
+
+
+
+```cpp
+int main()
+{
+    int* a = new int;
+    int* b = new int{3};    // 初始化
+    int* c = new int[100];  // 堆区数组
+    
+    *a = 1;
+    (*b)++;
+    c[1] = 5;
+    c[10] = 6;
+    
+    
+    delete a;
+    delete b;
+    delete []c;   // 此处的中括号千万不能忘写！
+    
+    return 0;
+}
+```
+
+
+
+作用域运算符(::)
+
+
+
+
+
+### 类中成员的三种访问权限：
+
+- private：私有的，默认访问权限，只能在本类中访问。
+- protected：保护的，只能在本类中和子类中访问。
+- public：共有的，在所有地方(本类、子类、类外)都可以访问。
+
+
+
+this ：C++ 关键字，表示当前对象的指针。
+
+
+
+计算对象所占内存空间大小时只考虑非静态属性，不考虑静态属性和所有方法，因为静态属性和方法每个类只有一份，所有对象共享，所有它们所占内存空间不算在每个对象身上。具体计算方法和结构体完全一样。
+
+
+
+驼峰式命名风格。
+
+
+
