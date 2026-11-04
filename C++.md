@@ -610,6 +610,7 @@ int main()
 }
 ```
 
+<<<<<<< HEAD
 
 
 
@@ -717,4 +718,127 @@ static 和 const 关键字可以同时使用，用于修饰属性，即静态常
 
 
 
-默认赋值运算符是“浅拷贝”，某些情况下会导致问题(如指针属性)，此时我们需要自己重载赋值运算符实现“深拷贝”。
+**默认赋值运算符是“浅拷贝”，某些情况下会导致问题(如指针属性)，此时我们需要自己重载赋值运算符实现“深拷贝”。**
+
+
+
+
+
+熟练掌握常用运算符的重载方法：
+
+- 单目运算符
+- 双目运算符
+
+
+
+ostream：output stream，输出流类，C++ 标准库中的一个类，cout 是该类的对象，全局的。
+
+istream：input stram，输入流类，C++ 标准库中的一个类，cin 是该类的对象，全局的
+
+
+
+不能重载的运算符：
+
+- `::` (作用域运算符)
+- `. ` (成员运算符)
+- `.*`  (成员指针访问)
+- `?`: (条件运算符)
+- `sizeof` (求长度运算符)
+- `typeid`(求类型运算符)
+
+
+
+
+
+## auto 关键字
+
+
+
+在 C 语言中用于修饰变量，表示自动内存管理，非常鸡肋！
+
+在 C++ 中作用发生了改变，用于自动类型推导
+
+
+
+```cpp
+int i = 3;
+auto j = 3;  // 完全等效于 int j = 3;
+
+auto f = -3.14;
+
+auto& k = i;
+auto* p = &i;
+
+auto n = 123UL;
+
+auto a;   // error
+```
+
+
+
+
+
+
+
+## 类模板(Class Template)
+
+
+
+类模板不是具体类，需要通过尖括号传入具体类型参数才能变为具体类，然后再用于创建对象
+
+
+
+```cpp
+template <typename T>
+class calc
+{
+private:
+    T a;
+    T b;
+    
+public:
+    calc()
+    {
+    }
+    
+    calc(T a, T b): a(a), b(b)
+    {
+    }
+    
+    T mul()
+    {
+        return a * b;
+    }
+};
+
+
+template <typename T>
+T calc<T>::mul()
+{
+    return a * b;
+}
+
+
+int main()
+{
+    calc<int> c1(3, 4);
+    std::cout << c1.sum() << std::endl;
+    
+    calc<double> c2(1.1, 4.7);
+    std::cout << c2.sum() << std::endl;
+    
+    
+    return 0;
+}
+```
+
+
+
+
+
+
+
+实战：
+
+1. 实现通用排序算法
+2. 实现链表
