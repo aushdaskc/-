@@ -670,8 +670,12 @@ STM32 有 5 个时钟源：
 AHB 总线：高级主机总线，连接 CPU、RAM、Flash 等高速设备
 APB 总线：高级外设总线，用于连接各种外设，分为 APB1 和 APB2，它们都桥接到 AHB 总线上，APB2 > APB1，APB2 总线用于连接高速外设，APB1 用于连接低速外设
 
+
+
 > Peripheral：外设
 > Bus：总线
+
+
 
 SYSCLK 的三个来源：
 

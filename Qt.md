@@ -92,3 +92,25 @@ Qt 程序执行流程：
 
 
 QObject：Qt 库中的根类，大部分类都直接或间接继承于它。
+
+
+
+
+
+## 常用 Widgets 用法
+
+
+
+
+
+QPushButton：普通按钮
+QRadioButton：单选按钮
+QCheckBox：复选框
+QLabel：标签，用于显示文本或图像
+QLineEdit：单行编辑框，用于输入一行文本
+
+
+
+调试输出：qDebug
+
+屏幕坐标系
