@@ -109,8 +109,120 @@ QCheckBox：复选框
 QLabel：标签，用于显示文本或图像
 QLineEdit：单行编辑框，用于输入一行文本
 
+QPlainTextEdit
+QDateEdit
+QComboBox
+
+
+
+输入合法性校验
+
 
 
 调试输出：qDebug
 
 屏幕坐标系
+
+
+
+
+
+
+
+## 对话框(Dialog)
+
+
+
+QDialog
+
+
+
+对话框分为两种：
+
+- 模态对话框(Model Dialog)：弹出后会一直阻塞其父窗口，直到用户关闭该窗口
+- 非模态对话框(Modeless Dialog)：弹出后不会阻塞其父窗口，用户依然可以在父窗口上操作
+
+
+
+
+
+### 通用对话框(Common Dialog)
+
+
+
+实现一些通用功能的对话框窗口，常用的有：
+
+- 消息框(QMessageBox)
+- 打开文件/保存文件对话框(QFileDialg)
+- 选择颜色对话框(QColorDialg)
+- 选择字体对话框(QFontDialg)
+
+
+
+
+
+
+
+## 常用文本数据格式
+
+
+
+
+
+**CSV**
+
+1001,张三,男,4.5
+
+
+
+**JSON**
+
+[{
+
+"sno":1001
+
+"name":"张三"
+
+"sex":"男"
+
+"sight":4.5
+
+},
+
+
+
+{
+
+"sno":1002
+
+"name":"李四"
+
+"sex":"男"
+
+"sight":4.6
+
+}]
+
+
+
+JSON格式解析库：cJSON
+
+
+
+**XML**
+
+```xml	
+<xml charset="UTF-8">
+	<student id="1">
+        <sno>1001</sno>
+        <name>张三</name>
+        <sex>男</sex>
+        <sight>4.5</sight>
+    </student>
+</xml>
+```
+
+
+
+XML 解析库：tinyxml
+
