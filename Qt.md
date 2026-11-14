@@ -226,3 +226,113 @@ JSON格式解析库：cJSON
 
 XML 解析库：tinyxml
 
+
+
+
+
+
+
+纯代码方式实现 UI
+
+
+
+Qt Designer：Qt 设计器
+
+
+
+UIC：UI 编译器，负责将 UI 文件（就是一个 XML 文件）编译为 C++ 代码（在预处理阶段）。
+
+
+
+对象树(Object Tree)机制
+
+
+
+信号和槽的连接方式：
+
+- 直接连接(Qt::DirectConnection)：立即在发射信号的线程中调用槽函数，适用于同一个线程中的对象。
+- 队列连接(Qt::QueuedConnection)：槽函数将在接收者对象所在的线程中执行，适用于不同线程中的对象。
+- 自动连接(Qt::AutoConnection)：如果发射者和接收者属于同一个线程，就是用直接连接，否则使用队列连接。
+- 阻塞队列连接(Qt::BlockingQueuedConnection)：发射信号后阻塞等待槽函数执行结束。
+- 唯一连接(Qt::UniqueConnection)：需要和上面四种连接方式配合使用，限制相同连接只有一个，重复连接会失败。
+
+
+
+布局管理器(Layout)：
+
+- 水平布局管理器(QHBoxLayout)
+- 垂直布局管理器(QVBoxLayout)
+- 网格布局管理器(QVGridLayout)
+- 表单布局管理器(QFormLayout)
+- 栈布局管理器(QStackedLayout)
+
+
+
+
+
+多窗口交互：
+
+- 模态对话框
+- 非模态对话框
+
+
+
+掌握不同窗口之间的数据传输。
+
+
+
+explicit 关键字：C++ 关键字，用于修饰构造函数，表示该函数必须显示使用，不能用于自动类型转换。
+
+
+
+
+
+
+
+## 线程(Thread)
+
+
+
+UI Thread：负责用户界面处理(事件循环)，千万不能执行耗时任务，否则窗口会失去响应，严重影响用户体验。
+
+Worker Thread：工作者线程，不负责界面处理，用于执行耗时任务，如大量数据排序、大文件拷贝、通信等。
+
+
+
+主线程就是：UI Thread。
+
+
+
+Qt 库中线程实现方法：
+
+- 子类化  QThread，重写 run 方法
+- moveToThread
+- QtConcurrent
+
+
+
+核心要点：
+
+- Worker Thread 不要直接操作 UI，因为 UI 对象是非线程安全的，通过信号槽实现
+- 线程参数传递方法
+
+
+
+
+
+## 自定义信号
+
+
+
+信号就是一个没有实现的方法，支持参数，使用 emit 宏发射信号。
+
+
+
+
+
+## 通信
+
+
+
+基于 TCP 通信：QTcpServer、QTcpSocket
+基于 UDP 通信：QUdpSocket
