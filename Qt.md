@@ -336,3 +336,44 @@ Qt 库中线程实现方法：
 
 基于 TCP 通信：QTcpServer、QTcpSocket
 基于 UDP 通信：QUdpSocket
+
+
+
+
+
+
+
+## 元对象系统(Meta-Object System)
+
+
+
+MOS 是 Qt 框架的基石，为信号-槽、动态属性、发射等提供支持。
+
+
+
+启用 MOS 必备条件：
+
+- 必须继承于 Object 类
+- 必须在类的私有域使用 Q_OBJECT 宏
+- MOC：元对象编译器
+
+
+
+
+
+## 上位机开发
+
+
+
+MQTT Client 类：QMqttClient
+串口通信类：QSerialPort
+
+
+
+
+
+## Qt 软件发布
+
+
+
+使用 windeployqt 工具
