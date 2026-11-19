@@ -377,3 +377,99 @@ MQTT Client 类：QMqttClient
 
 
 使用 windeployqt 工具
+
+
+
+
+
+## 上位机和下位机开发
+
+
+
+上位机：Linux/Windows + Qt
+
+下位机：MCU(STM32)
+
+
+
+串口通信协议设计：
+
+- 控制指令帧格式：固定帧头(0xA5) + Device Type(1 Byte) +Device ID(1 Byte) + Command(1 Byte) + ARG(2 Btyte) + 固定帧尾(0x5A)
+- 传感器数据主动上报格式：Board ID/sensor/Device ID SenSor Data\n
+- 状态数据主动上报格式：Board ID/state/Device ID State Data\n
+
+
+
+Device Type 定义：
+
+- 0x01：LED
+- 0x02：Beep
+- 0x03：继电器
+- 0x04：Servo
+- 0x05：直流减速电机
+- 0x06：伺服电机
+- ..........
+
+
+
+Command：
+
+- LED：1 表示开，0 表示关
+- Beep：1 表示报警，0 表示静音
+- 继电器：1 表示吸合，0 表示断开，2 表示延时吸合，3 表示延时断开
+- Servo：1 表示正摆，0 表示反摆
+- ..........
+
+
+
+
+
+## Qt Quick/QML 开发
+
+
+
+Qt Widgets 开发应用场景：
+
+- 传统桌面应用
+- 经典窗口交互（键鼠操作）
+- 高效、硬件资源有限
+- 无需复杂动画效果
+
+
+
+Qt Quick/QML 开发应用场景：
+
+- 现代化 UI 交互、触摸屏界面
+- 炫酷 UI、复杂动画效果
+- 支持 GPU 加速渲染
+
+
+
+
+
+QML：Qt Meta Language，Qt 元对象语言，用于描述用户界面。
+
+Qt Quick：基于 QML 的开发框架(标准库)
+
+
+
+
+
+本块内容核心要点：
+
+- QML 基本语法
+- C++ 与 QML 界面交互方式：属性绑定、暴露方法、信号和槽
+
+
+
+QML 文件的结构：
+
+- 导入部分
+- 对象树
+
+
+
+两种布局方式：
+
+- 锚点定位(anchors)：相对父对象或兄弟对象定位
+- 布局管理器
